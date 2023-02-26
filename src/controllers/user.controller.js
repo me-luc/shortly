@@ -2,10 +2,17 @@ import bcrypt from "bcrypt";
 import {
 	checkIfEmailExists,
 	createNewUser,
+	getEncryptedPassword,
 } from "../repositories/user.respository.js";
 
 export function signIn(req, res) {
 	try {
+		const { email, password } = req.body;
+
+		const encryptedPassword = getEncryptedPassword(email);
+
+		const isPasswordCorrect = bcrypt.compare(password, encryptedPassword);
+		if (!isPasswordCorrect) return res.sendStatus(401);
 	} catch (error) {
 		registerError("at function -signIn on ~user.controller.js \n" + error);
 	}

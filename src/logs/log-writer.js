@@ -12,15 +12,23 @@ export default function registerError(error) {
 	const formattedError = `[ ${currentTime} ] - ${error} ${lineBreak}`;
 	try {
 		if (fs.existsSync(path)) {
-			fs.appendFileSync(path, formattedError, function (err) {
-				if (err) console.log("error while trying to write a log", err);
-			});
+			appendError(formattedError);
 		} else {
-			fs.writeFileSync(path, formattedError, function (err) {
-				if (err) console.log("error while trying to write a log", err);
-			});
+			createFileAndAddError(formattedError);
 		}
 	} catch (error) {
 		console.log("error -> ", error);
 	}
+}
+
+function createFileAndAddError(error) {
+	fs.writeFileSync(path, error, function (err) {
+		if (err) console.log("error while trying to write a log", err);
+	});
+}
+
+function appendError(error) {
+	fs.appendFileSync(path, error, function (err) {
+		if (err) console.log("error while trying to write a log", err);
+	});
 }

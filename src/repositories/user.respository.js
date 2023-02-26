@@ -16,6 +16,21 @@ export async function checkIfEmailExists(email) {
 	}
 }
 
+export async function getEncryptedPassword(email) {
+	try {
+		const password = await db.query(
+			`SELECT password FROM users WHERE email = $1`,
+			[email]
+		);
+		return password.rows[0];
+	} catch (error) {
+		registerError(
+			"at function -getEncryptedPassword on ~user.repository.js \n" +
+				error
+		);
+	}
+}
+
 export async function createNewUser({ email, name, password }) {
 	try {
 		await db.query(
