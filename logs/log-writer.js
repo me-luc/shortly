@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import gmt from "dayjs/plugin/timezone.js";
 import fs from "fs";
 
-const path = "./src/logs/errors.log";
+const path = "./logs/errors.log";
 dayjs.extend(gmt);
 
 export default function registerError(error) {

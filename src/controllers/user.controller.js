@@ -4,6 +4,8 @@ import {
 	createNewUser,
 	getEncryptedPassword,
 } from "../repositories/user.respository.js";
+import { v4 as uuid } from "uuid";
+import { addNewSession } from "../repositories/session.respository.js";
 
 export function signIn(req, res) {
 	try {
@@ -27,9 +29,14 @@ export async function signUp(req, res) {
 
 		const encryptedPassword = await bcrypt.hash(password, 10);
 		await createNewUser({ email, name, password: encryptedPassword });
-
-		return res.sendStatus(201);
+		const token = createToken();
+		addNewSession(token, email);
+		return res.status(201).send(token);
 	} catch (error) {
 		registerError("at function -signUp on ~user.controller.js \n" + error);
 	}
+}
+
+function createToken() {
+	return uuid();
 }

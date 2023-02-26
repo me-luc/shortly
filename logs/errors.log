@@ -1,0 +1,12 @@
+[ 2023-02-25 23:13:52 ] - at function -createNewUser on ~user.repository.js 
+error: column "passwor" of relation "users" does not exist 
+
+[ 2023-02-26 18:09:27 ] - at function -createNewUser on ~user.repository.js 
+error: column "passwor" of relation "users" does not exist 
+
+[ 2023-02-26 18:09:27 ] - at function -addNewSession on ~user.repository.js 
+error: value too long for type character varying(22) 
+
+[ 2023-02-26 18:11:11 ] - at function -addNewSession on ~user.repository.js 
+error: value too long for type character varying(22) 
+
