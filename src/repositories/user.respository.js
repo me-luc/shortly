@@ -70,3 +70,25 @@ export async function getUserByToken(token) {
 		);
 	}
 }
+
+export async function getAllUserData() {
+	try {
+		const data = db.query(`SELECT `);
+	} catch (error) {
+		registerError(
+			"at function -getAllUserData on ~session.repository.js \n" + error
+		);
+	}
+}
+
+// SELECT
+// 		users.id AS "userId",
+// 		users.name AS "userName",
+// 		SUM(urls.visit_count) AS "visitCount",
+// 		urls.id AS "urlId",
+// 		urls.short_url AS "shortUrl",
+// 		urls.url AS "url",
+// 		urls.visit_count AS "urlVisitCount"
+// FROM users JOIN urls ON users.id = urls.user_id
+// GROUP BY urls.id, users.id
+// ORDER BY "userId" ASC

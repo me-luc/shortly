@@ -37,6 +37,14 @@ export async function signUp(req, res) {
 	}
 }
 
+export async function getUserInfo(req, res) {
+	try {
+		
+	} catch (error) {
+		registerError("at function -signUp on ~user.controller.js \n" + error);
+	}
+}
+
 function createToken() {
 	return uuid();
 }

@@ -10,3 +10,6 @@ error: value too long for type character varying(22)
 [ 2023-02-26 18:11:11 ] - at function -addNewSession on ~user.repository.js 
 error: value too long for type character varying(22) 
 
+[ 2023-02-27 21:46:17 ] - at function -getRankingList on ~ranking.repository.js 
+error: column "links_count" does not exist 
+
