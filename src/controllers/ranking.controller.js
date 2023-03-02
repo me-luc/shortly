@@ -10,5 +10,6 @@ export async function getRanking(req, res) {
 		registerError(
 			"at function -getRanking on ~ranking.controller.js \n" + error
 		);
+		return res.status(500).send("It seems to be an error in the server!");
 	}
 }

@@ -19,6 +19,7 @@ export function signIn(req, res) {
 		if (!isPasswordCorrect) return res.sendStatus(401);
 	} catch (error) {
 		registerError("at function -signIn on ~user.controller.js \n" + error);
+		return res.status(500).send("It seems to be an error in the server!");
 	}
 }
 
@@ -36,6 +37,7 @@ export async function signUp(req, res) {
 		return res.status(201).send(token);
 	} catch (error) {
 		registerError("at function -signUp on ~user.controller.js \n" + error);
+		return res.status(500).send("It seems to be an error in the server!");
 	}
 }
 
@@ -49,6 +51,7 @@ export async function getUserInfo(req, res) {
 		return res.status(200).send(formattedUserInfo);
 	} catch (error) {
 		registerError("at function -signUp on ~user.controller.js \n" + error);
+		return res.status(500).send("It seems to be an error in the server!");
 	}
 }
 
