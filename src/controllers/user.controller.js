@@ -46,7 +46,7 @@ export async function getUserInfo(req, res) {
 		const urlList = await getUserUrlList(userId);
 
 		const formattedUserInfo = { ...userInfo, shortenedUrls: urlList };
-		console.log(formattedUserInfo);
+		return res.status(200).send(formattedUserInfo);
 	} catch (error) {
 		registerError("at function -signUp on ~user.controller.js \n" + error);
 	}
