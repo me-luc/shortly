@@ -135,7 +135,7 @@ export async function getUserIdByUrlId(urlId) {
 	try {
 		const userId = await db.query(
 			`SELECT user_id FROM urls WHERE id = $1`,
-			urlId
+			[urlId]
 		);
 		return userId.rows[0];
 	} catch (error) {

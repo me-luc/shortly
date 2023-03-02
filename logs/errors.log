@@ -46,3 +46,9 @@ error: column "token" does not exist
 [ 2023-03-02 16:19:27 ] - at function -getUserByUrlId on ~user.repository.js 
 Error: Query values must be an array 
 
+[ 2023-03-02 16:21:30 ] - at function -getUserByUrlId on ~user.repository.js 
+Error: Query values must be an array 
+
+[ 2023-03-02 16:21:51 ] - at function -getUserByUrlId on ~user.repository.js 
+Error: Query values must be an array 
+

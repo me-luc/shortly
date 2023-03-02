@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { deleteUrl } from "../controllers/url.controller.js";
+import { deleteUrl, getUrlById } from "../controllers/url.controller.js";
 import { validateToken } from "../middlewares/auth.middleware.js";
 import { checkUrlDeletePermission } from "../middlewares/url.middleware.js";
 
@@ -11,5 +11,8 @@ urlRouter.delete(
 	checkUrlDeletePermission,
 	deleteUrl
 );
+urlRouter.post("/urls/shorten", validateToken);
+urlRouter.get("/urls/:id", getUrlById);
+urlRouter.get("/urls/open/:shortUrl");
 
 export default urlRouter;
