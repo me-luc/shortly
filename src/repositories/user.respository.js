@@ -60,13 +60,13 @@ export async function getUserIdByEmail(email) {
 export async function getUserByToken(token) {
 	try {
 		const userFound = await db.query(
-			`SELECT * FROM users WHERE token = $1`,
+			`SELECT *, user_id AS "userId" FROM sessions WHERE token = $1`,
 			[token]
 		);
 		return userFound.rows[0];
 	} catch (error) {
 		registerError(
-			"at function -checkToken on ~session.repository.js \n" + error
+			"at function -checkToken on ~user.repository.js \n" + error
 		);
 	}
 }
@@ -76,7 +76,57 @@ export async function getAllUserData() {
 		const data = db.query(`SELECT `);
 	} catch (error) {
 		registerError(
-			"at function -getAllUserData on ~session.repository.js \n" + error
+			"at function -getAllUserData on ~user.repository.js \n" + error
+		);
+	}
+}
+
+export async function getUserUrlList(userId) {
+	try {
+		const urlList = await db.query(
+			`SELECT id, short_url AS "shortUrl", url, visit_count AS "visitCount" FROM urls WHERE user_id = $1`,
+			[userId]
+		);
+		return urlList.rows;
+	} catch (error) {
+		registerError(
+			"at function -getUserUrlList on ~user.repository.js \n" + error
+		);
+	}
+}
+
+export async function getUserData(userId) {
+	try {
+		const userInfo = await db.query(
+			`
+			SELECT 
+				users.id, 
+				users.name, 
+				SUM(urls.visit_count) AS "visitCount"
+			FROM users 
+			LEFT JOIN urls ON users.id = urls.user_id
+			WHERE users.id = $1
+			GROUP BY users.id
+		`,
+			[userId]
+		);
+		return userInfo.rows[0];
+	} catch (error) {
+		registerError(
+			"at function -getUserInfo on ~user.repository.js \n" + error
+		);
+	}
+}
+
+export async function getUserIdByToken(token) {
+	try {
+		const userId = await db.query(`SELECT id FROM users WHERE token = $1`, [
+			token,
+		]);
+		return userId.rows[0];
+	} catch (error) {
+		registerError(
+			"at function -getUserIdByToken on ~user.repository.js \n" + error
 		);
 	}
 }

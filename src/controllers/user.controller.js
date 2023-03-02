@@ -3,6 +3,8 @@ import {
 	checkIfEmailExists,
 	createNewUser,
 	getEncryptedPassword,
+	getUserData,
+	getUserUrlList,
 } from "../repositories/user.respository.js";
 import { v4 as uuid } from "uuid";
 import { addNewSession } from "../repositories/session.respository.js";
@@ -39,7 +41,12 @@ export async function signUp(req, res) {
 
 export async function getUserInfo(req, res) {
 	try {
-		
+		const userId = req.locals.userId;
+		const userInfo = await getUserData(userId);
+		const urlList = await getUserUrlList(userId);
+
+		const formattedUserInfo = { ...userInfo, shortenedUrls: urlList };
+		console.log(formattedUserInfo);
 	} catch (error) {
 		registerError("at function -signUp on ~user.controller.js \n" + error);
 	}

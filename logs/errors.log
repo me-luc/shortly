@@ -13,3 +13,33 @@ error: value too long for type character varying(22)
 [ 2023-02-27 21:46:17 ] - at function -getRankingList on ~ranking.repository.js 
 error: column "links_count" does not exist 
 
+[ 2023-03-01 20:27:54 ] - at function -checkToken on ~user.repository.js 
+error: column "token" does not exist 
+
+[ 2023-03-01 20:29:55 ] - at function -checkToken on ~user.repository.js 
+error: column "token" does not exist 
+
+[ 2023-03-01 20:32:24 ] - at function -checkToken on ~user.repository.js 
+error: column "token" does not exist 
+
+[ 2023-03-01 20:32:39 ] - at function -checkToken on ~user.repository.js 
+error: column "token" does not exist 
+
+[ 2023-03-01 20:33:23 ] - at function -checkToken on ~user.repository.js 
+error: column "token" does not exist 
+
+[ 2023-03-01 20:33:42 ] - at function -checkToken on ~user.repository.js 
+error: column "token" does not exist 
+
+[ 2023-03-01 20:36:10 ] - at function -getUserIdByToken on ~user.repository.js 
+error: column "token" does not exist 
+
+[ 2023-03-01 20:36:30 ] - at function -getUserIdByToken on ~user.repository.js 
+error: column "token" does not exist 
+
+[ 2023-03-01 20:38:50 ] - at function -getUserIdByToken on ~user.repository.js 
+error: column "token" does not exist 
+
+[ 2023-03-01 20:39:45 ] - at function -getUserIdByToken on ~user.repository.js 
+error: column "token" does not exist 
+

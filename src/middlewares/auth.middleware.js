@@ -1,13 +1,19 @@
-import { getUserByToken } from "../repositories/user.respository";
+import { getUserByToken } from "../repositories/user.respository.js";
 
-export function validateToken(req, res, next) {
-	const token = req.locals.token;
-	const userFound = getUserByToken(token);
-	if (!userFound) return res.sendStatus(401);
+function formatToken(authorization) {
+	return authorization?.replace("Bearer ", "");
 }
 
-export function formatToken(req, res, next) {
+export async function validateToken(req, res, next) {
 	const { authorization } = req.headers;
-	req.locals.token = authorization?.replace("Bearer ", "");
+	const token = formatToken(authorization);
+	if (!token) return res.sendStatus(401);
+
+	req.locals = req.locals || {};
+	req.locals.token = token;
+	const userFound = await getUserByToken(token);
+
+	if (!userFound) return res.sendStatus(401);
+	req.locals.userId = userFound.userId;
 	next();
 }
