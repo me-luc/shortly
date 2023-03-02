@@ -29,3 +29,21 @@ export async function getUrlById(req, res) {
 		return res.status(500).send("It seems to be an error in the server!");
 	}
 }
+
+export async function openShortUrl(req, res) {
+	try {
+		const shortUrl = req.params.shortUrl;
+		const urlFound = await db.query(
+			`SELECT url FROM urls WHERE short_url = $1`,
+			[shortUrl]
+		);
+		if (urlFound.rowCount === 0) return res.sendStatus(404);
+		const url = urlFound.rows[0].url;
+		return res.redirect(301, url);
+	} catch (error) {
+		registerError(
+			"at function -getUrlById on ~url.controller.js \n" + error
+		);
+		return res.status(500).send("It seems to be an error in the server!");
+	}
+}
