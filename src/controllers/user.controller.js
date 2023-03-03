@@ -16,9 +16,9 @@ export async function signIn(req, res) {
 		const encryptedPassword = await getEncryptedPassword(email);
 		if (encryptedPassword.rowCount == 0) return res.sendStatus(401);
 
-		const isPasswordCorrect = bcrypt.compare(
+		const isPasswordCorrect = await bcrypt.compare(
 			password,
-			encryptedPassword.password
+			encryptedPassword.rows[0].password
 		);
 		if (!isPasswordCorrect) return res.sendStatus(401);
 
