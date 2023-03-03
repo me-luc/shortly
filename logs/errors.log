@@ -82,3 +82,9 @@ ReferenceError: userId is not defined
 [ 2023-03-02 21:12:00 ] - at function -checkUrlDeletePermission on ~url.middleware.js 
 ReferenceError: userId is not defined 
 
+[ 2023-03-02 22:15:43 ] - at function -getUrlById on ~url.controller.js 
+error: invalid input syntax for type integer: "shorten" 
+
+[ 2023-03-02 22:16:59 ] - at function -getUrlById on ~url.controller.js 
+error: invalid input syntax for type integer: "shorten" 
+
