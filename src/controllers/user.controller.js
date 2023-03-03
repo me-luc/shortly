@@ -14,6 +14,8 @@ export async function signIn(req, res) {
 		const { email, password } = req.body;
 
 		const encryptedPassword = await getEncryptedPassword(email);
+		if (encryptedPassword.rowCount == 0) return res.sendStatus(401);
+
 		const isPasswordCorrect = bcrypt.compare(
 			password,
 			encryptedPassword.password
@@ -23,7 +25,7 @@ export async function signIn(req, res) {
 		const token = createToken();
 		console.log(token.length);
 		addNewSession(token, email);
-		return res.sendStatus(200);
+		return res.status(200).send({ token });
 	} catch (error) {
 		registerError("at function -signIn on ~user.controller.js \n" + error);
 		return res.status(500).send("It seems to be an error in the server!");
