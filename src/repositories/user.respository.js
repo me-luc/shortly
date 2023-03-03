@@ -134,7 +134,7 @@ export async function getUserIdByToken(token) {
 export async function getUserIdByUrlId(urlId) {
 	try {
 		const userId = await db.query(
-			`SELECT user_id FROM urls WHERE id = $1`,
+			`SELECT user_id AS "userId" FROM urls WHERE id = $1`,
 			[urlId]
 		);
 		return userId.rows[0];

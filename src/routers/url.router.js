@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+	addUrl,
 	deleteUrl,
 	getUrlById,
 	openShortUrl,
@@ -17,7 +18,12 @@ urlRouter.delete(
 	checkUrlDeletePermission,
 	deleteUrl
 );
-urlRouter.post("/urls/shorten", validateToken, validateSchema(urlSchema));
+urlRouter.post(
+	"/urls/shorten",
+	validateSchema(urlSchema),
+	validateToken,
+	addUrl
+);
 urlRouter.get("/urls/:id", getUrlById);
 urlRouter.get("/urls/open/:shortUrl", openShortUrl);
 

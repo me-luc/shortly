@@ -30,3 +30,10 @@ export async function findUrlByShortUrlUserFormat(shortUrl) {
 		[shortUrl]
 	);
 }
+
+export async function updateVisitCount(shortUrl) {
+	return await db.query(
+		`UPDATE urls SET visit_count = visit_count + 1 WHERE short_url = $1;`,
+		[shortUrl]
+	);
+}

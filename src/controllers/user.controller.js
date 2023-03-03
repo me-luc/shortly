@@ -9,14 +9,21 @@ import {
 import { v4 as uuid } from "uuid";
 import { addNewSession } from "../repositories/session.respository.js";
 
-export function signIn(req, res) {
+export async function signIn(req, res) {
 	try {
 		const { email, password } = req.body;
 
-		const encryptedPassword = getEncryptedPassword(email);
-
-		const isPasswordCorrect = bcrypt.compare(password, encryptedPassword);
+		const encryptedPassword = await getEncryptedPassword(email);
+		const isPasswordCorrect = bcrypt.compare(
+			password,
+			encryptedPassword.password
+		);
 		if (!isPasswordCorrect) return res.sendStatus(401);
+
+		const token = createToken();
+		console.log(token.length);
+		addNewSession(token, email);
+		return res.sendStatus(200);
 	} catch (error) {
 		registerError("at function -signIn on ~user.controller.js \n" + error);
 		return res.status(500).send("It seems to be an error in the server!");
