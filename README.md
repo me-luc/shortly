@@ -84,7 +84,7 @@ headers: {
 
 ### Request Header
 
-- `token` (string, required): The token that identifies the user and is provided while signing in/up.
+- `Authorization` (string, required): A bearer token obtained from a successful login request.
 
 ### Response
 
@@ -107,3 +107,15 @@ headers: {
   }
 }
 ```
+
+### Response Body
+
+Returns a JSON object with the following fields:
+- `id` (string): The unique identifier of the user.
+- `name` (string): The name of the user.
+- `visitCount` (number): The total number of visits to all shortened URLs created by the user.
+- `shortenedUrls` (array): An array of JSON objects, each representing a shortened URL created by the user. Each object contains the following fields:
+    - `id` (string): The unique identifier of the shortened URL.
+    - `shortUrl` (string): The short URL generated for the original URL.
+    - `url` (string): The original URL that was shortened.
+    - `visitCount` (number): The number of visits to the shortened URL.
